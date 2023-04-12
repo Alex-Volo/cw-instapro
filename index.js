@@ -1,4 +1,11 @@
 // Начало
+/* 1. Интегрировать верстку списка постов 
+   (рендер того, что пришло по GET запросу)
+   2. Возможность добавлять посты
+      2.1. Сверстать страницу добавления постов
+      2.2. Подключить логику
+   3. Страница с постами конкретного юзверя
+   4. Реализовать возможность лайков */
 import { getPosts } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
