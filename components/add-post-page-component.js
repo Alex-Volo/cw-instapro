@@ -38,7 +38,8 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     renderHeaderComponent({
       element: document.querySelector(".header-container"),
     });
-
+    
+    const imageContainer = document.querySelector('.upload-image-container');
   // document.getElementById("add-button").addEventListener("click", () => {
   //   onAddPostClick({
   //     description: "Описание картинки",
