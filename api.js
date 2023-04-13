@@ -86,14 +86,3 @@ export function uploadImage({ file }) {
   })
     .then(response => response.json());
 }
-
-export function postImage(file) {
-  const data = new FormData;
-  data.append("file", file);
-
-  return fetch("https://webdev-hw-api.vercel.app/api/upload/image", {
-    method: "POST",
-    body: data
-  })
-    .then(response => response.json())
-}

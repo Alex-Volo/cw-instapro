@@ -3,8 +3,8 @@
    (рендер того, что пришло по GET запросу) +
    2. Возможность добавлять посты
       2.1. Сверстать страницу добавления постов +
-      2.2. Подключить логику
-      2.3. Разобраться с uploadImage
+      2.2. Подключить логику +
+      2.3. Разобраться с uploadImage +
    3. Страница с постами конкретного юзверя
    4. Реализовать возможность лайков */
 
@@ -117,7 +117,7 @@ const renderApp = () => {
   }
 
   if (page === ADD_POSTS_PAGE) {
-    return renderAddPostPageComponent({ appEl });
+    return renderAddPostPageComponent({ appEl, token: getToken() });
   }
 
   if (page === POSTS_PAGE) {
