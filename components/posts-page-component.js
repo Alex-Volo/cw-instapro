@@ -18,8 +18,8 @@ export function renderPostsPageComponent({ appEl }) {
       return result + `
       <li class="post" data-index = "${index}">
       
-        <div class="post-header" data-user-id=${post.user.id}
-          <img src=${post.user.imageUrl}class="post-header__user-image">
+        <div class="post-header" data-user-id=${post.user.id}>
+          <img src="${post.user.imageUrl}" class="post-header__user-image">
           <p class="post-header__user-name">${[post.user.name]}</p>
         </div>
 
