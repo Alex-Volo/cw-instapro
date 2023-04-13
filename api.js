@@ -57,14 +57,13 @@ export function loginUser({ login, password }) {
 }
 
 // Загружает картинку в облако, возвращает url загруженной картинки
-export function uploadImage({ file }) {
-  const data = new FormData();
+export function uploadImage(file) {
+  const data = new FormData;
   data.append("file", file);
 
-  return fetch(baseHost + "/api/upload/image", {
+  return fetch("https://webdev-hw-api.vercel.app/api/upload/image", {
     method: "POST",
-    body: data,
-  }).then((response) => {
-    return response.json();
-  });
+    body: data
+  })
+  .then(response => response.json())
 }

@@ -1,3 +1,4 @@
+import { uploadImage } from "../api.js";
 import { renderHeaderComponent } from "./header-component.js";
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
   const render = () => {
@@ -70,16 +71,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
           }
 
           </div>`;
-        function postImage(file) {
-          const data = new FormData;
-          data.append("file", file);
-
-          return fetch("https://webdev-hw-api.vercel.app/api/upload/image", {
-            method: "POST",
-            body: data
-          })
-            .then(response => response.json())
-        };
+          
         const imageInput = element.querySelector(".file-upload-input");
 
         imageInput?.addEventListener("change", (() => {
@@ -89,7 +81,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
             const imageInputLabel = document.querySelector(".file-upload-label");
             imageInputLabel.setAttribute("disabled", !0),
               imageInputLabel.textContent = "Загружаю файл...",
-              postImage(imageFile)
+              uploadImage(imageFile)
                 .then(data => {
                   imageUrl = data.fileUrl,
                     urlChange(imageUrl),
