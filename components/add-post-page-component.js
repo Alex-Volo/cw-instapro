@@ -38,16 +38,16 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     renderHeaderComponent({
       element: document.querySelector(".header-container"),
     });
-    
-    const imageContainer = document.querySelector('.upload-image-container');
-  // document.getElementById("add-button").addEventListener("click", () => {
-  //   onAddPostClick({
-  //     description: "Описание картинки",
-  //     imageUrl: "https://image.png",
-  //   });
-  // });
 
-    function l({element, urlChange}) {
+    const imageContainer = document.querySelector('.upload-image-container');
+    // document.getElementById("add-button").addEventListener("click", () => {
+    //   onAddPostClick({
+    //     description: "Описание картинки",
+    //     imageUrl: "https://image.png",
+    //   });
+    // });
+    l({ element: imageContainer, urlChange: (imageUrl) => imageUrl, })
+    function l({ element, urlChange }) {
       let imageUrl = "";
       const renderUploadImage = () => {
 
@@ -61,49 +61,45 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
                     Заменить фото
                   </button>
               </div>
-              ` 
-              : `
+              `
+            : `
                 <label class="file-upload-label secondary-button">
                     <input type="file" class="file-upload-input" style="display:none">Выберите фото
                 </label>
                 `
-            }
+          }
 
           </div>`;
+        function postImage(file) {
+          const data = new FormData;
+          data.append("file", file);
 
-          const imageInput = element.querySelector(".file-upload-input");
+          return fetch("https://webdev-hw-api.vercel.app/api/upload/image", {
+            method: "POST",
+            body: data
+          })
+            .then(response => response.json())
+        };
+        const imageInput = element.querySelector(".file-upload-input");
 
-          imageInput?.addEventListener("change", (() => {
-              const imageFile = imageInput.files[0];
+        imageInput?.addEventListener("change", (() => {
+          const imageFile = imageInput.files[0];
 
-              if (imageFile) {
-                  const imageInputLabel = document.querySelector(".file-upload-label");
-                  imageInputLabel.setAttribute("disabled", !0),
-                  imageInputLabel.textContent = "Загружаю файл...",
-
-                  function postImage({ file }) {
-                      const data = new FormData;
-                      data.append("file", file);
-
-                      return fetch("https://webdev-hw-api.vercel.app/api/upload/image", {
-                          method: "POST",
-                          body: data
-                      })
-                      .then(response => response.json())
-                  }
-
-                  postImage({ imageFile })
-                  .then(((data) => {
-                      imageUrl = data.fileUrl,
-                      urlChange(imageUrl),
-                      renderUploadImage()
-                  }
-                  ))
-              }
+          if (imageFile) {
+            const imageInputLabel = document.querySelector(".file-upload-label");
+            imageInputLabel.setAttribute("disabled", !0),
+              imageInputLabel.textContent = "Загружаю файл...",
+              postImage(imageFile)
+                .then(data => {
+                  imageUrl = data.fileUrl,
+                    urlChange(imageUrl),
+                    renderUploadImage();
+                })
           }
-          )),
-          element.querySelector(".file-upload-remove-button")?.addEventListener("click", (()=>{
-              imageUrl = "",
+        }
+        )),
+          element.querySelector(".file-upload-remove-button")?.addEventListener("click", (() => {
+            imageUrl = "",
               urlChange(imageUrl),
               renderUploadImage()
           }
@@ -112,13 +108,13 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
       renderUploadImage()
     }
-    
+
     document.getElementById("add-button").addEventListener("click", () => {
       const descriptionInput = document.querySelector('.input textarea');
       const imageInput = document.querySelector('.file-upload-input');
       onAddPostClick({
-          description: descriptionInput.value,
-          imageUrl: imageInput.value,
+        description: descriptionInput.value,
+        imageUrl: imageInput.value,
       })
     });
 
