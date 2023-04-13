@@ -4,8 +4,10 @@
    2. Возможность добавлять посты
       2.1. Сверстать страницу добавления постов +
       2.2. Подключить логику
+      2.3. Разобраться с uploadImage
    3. Страница с постами конкретного юзверя
    4. Реализовать возможность лайков */
+
 import { getPosts } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
@@ -115,14 +117,7 @@ const renderApp = () => {
   }
 
   if (page === ADD_POSTS_PAGE) {
-    return renderAddPostPageComponent({
-      appEl,
-      onAddPostClick({ description, imageUrl }) {
-        // TODO: реализовать добавление поста в API
-        console.log("Добавляю пост...", { description, imageUrl });
-        goToPage(POSTS_PAGE);
-      },
-    });
+    return renderAddPostPageComponent({ appEl });
   }
 
   if (page === POSTS_PAGE) {

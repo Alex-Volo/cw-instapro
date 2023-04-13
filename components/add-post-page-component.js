@@ -1,6 +1,8 @@
-import { uploadImage } from "../api.js";
+import { postImage } from "../api.js";
 import { renderHeaderComponent } from "./header-component.js";
-export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
+import { onAddPostClick } from "../api.js";
+import {getToken} from "../index.js"
+export function renderAddPostPageComponent({ appEl }) {
   const render = () => {
     // TODO: Реализовать страницу добавления поста
     const appHtml = `
@@ -41,13 +43,8 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     });
 
     const imageContainer = document.querySelector('.upload-image-container');
-    // document.getElementById("add-button").addEventListener("click", () => {
-    //   onAddPostClick({
-    //     description: "Описание картинки",
-    //     imageUrl: "https://image.png",
-    //   });
-    // });
-    l({ element: imageContainer, urlChange: (imageUrl) => imageUrl, })
+
+    l({ element: imageContainer, urlChange: (imageUrl) => currentImageUrl = imageUrl, })
     function l({ element, urlChange }) {
       let imageUrl = "";
       const renderUploadImage = () => {
@@ -71,7 +68,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
           }
 
           </div>`;
-          
+
         const imageInput = element.querySelector(".file-upload-input");
 
         imageInput?.addEventListener("change", (() => {
@@ -81,7 +78,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
             const imageInputLabel = document.querySelector(".file-upload-label");
             imageInputLabel.setAttribute("disabled", !0),
               imageInputLabel.textContent = "Загружаю файл...",
-              uploadImage(imageFile)
+              postImage(imageFile)
                 .then(data => {
                   imageUrl = data.fileUrl,
                     urlChange(imageUrl),
@@ -100,13 +97,13 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
       renderUploadImage()
     }
-
+    let currentImageUrl;
     document.getElementById("add-button").addEventListener("click", () => {
-      const descriptionInput = document.querySelector('.input textarea');
-      const imageInput = document.querySelector('.file-upload-input');
+      const descriptionInput = document.querySelector('.input.textarea');
       onAddPostClick({
         description: descriptionInput.value,
-        imageUrl: imageInput.value,
+        imageUrl: currentImageUrl,
+        token: getToken(),
       })
     });
 
