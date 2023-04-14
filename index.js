@@ -31,6 +31,7 @@ import {
 export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
+let userId = '';
 
 const getToken = () => {
   const token = user ? `Bearer ${user.token}` : undefined;
@@ -86,6 +87,7 @@ export const goToPage = (newPage, data) => {
         .then((userPosts) => {
           page = USER_POSTS_PAGE;
           posts = userPosts;
+          userId = data.userId;
           renderApp();
         })
       // TODO: реализовать получение постов юзера из API
@@ -129,15 +131,19 @@ const renderApp = () => {
   }
 
   if (page === POSTS_PAGE) {
+    let isUser = false;
     return renderPostsPageComponent({
       appEl,
+      isUser
     });
   }
 
   if (page === USER_POSTS_PAGE) {
+    let isUser = true;
     // TODO: реализовать страницу фотографию пользвателя
     return renderPostsPageComponent({
       appEl,
+      isUser
     });
   }
 };
