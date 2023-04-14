@@ -11,8 +11,10 @@
    4. Реализовать возможность лайков
       4.1. Дата-тег
       4.2. Функция на POST лайка +
-      4.3. Функция на POST дизлайка
-      4.4. Перерисовать конкретную кнопку */
+      4.3. Функция на POST дизлайка +
+      4.4. Логика переключения лайк/дизлайк и перерендер. +
+      4.5. Перерисовать конкретную кнопку + 
+   5. Подключить dateFNS*/
 
 import { getPosts, getUserPosts } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";

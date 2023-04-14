@@ -83,8 +83,16 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
   for (let button of document.querySelectorAll(".like-button")) {
       button.addEventListener("click", () => {
         const postId = button.dataset.postId;
-        fetchlike({ token, postId });
-        alert('like');  
+        const index = button.closest('.post').dataset.index;
+        let isLiked = ''
+        posts[index].isLiked ? isLiked = 1 : isLiked = 0;
+
+        fetchlike({ token, postId, isLiked })
+        .then(() => {
+          isLiked ? posts[index].isLiked = false : posts[index].isLiked = true;
+          renderPostsPageComponent({ appEl, isUser, token })
+        });
+ 
       });
   }
 }

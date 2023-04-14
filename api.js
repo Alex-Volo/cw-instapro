@@ -106,9 +106,9 @@ export function uploadImage({ file }) {
     .then(response => response.json());
 }
 
-export function fetchlike({ token, postId }) {
+export function fetchlike({ token, postId, isLiked }) {
   {
-    return fetch(postsHost + `/${postId}/like`, {
+    return fetch(postsHost + `/${postId}${isLiked ? '/dislike' : '/like'}`, {
       method: "POST",
       headers: {
         Authorization: token,
