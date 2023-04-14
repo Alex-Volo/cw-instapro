@@ -1,8 +1,9 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
+import { fetchlike } from "../api.js"
 
-export function renderPostsPageComponent({ appEl, isUser }) {
+export function renderPostsPageComponent({ appEl, isUser, token }) {
   // TODO: реализовать рендер постов из api
   console.log("Актуальный список постов:", posts);
   console.log(isUser)
@@ -39,7 +40,7 @@ export function renderPostsPageComponent({ appEl, isUser }) {
 
         <div class="post-likes">
 
-          <button data-post-id=${index} class="like-button">
+          <button data-post-id=${post.id} class="like-button">
             <img src="./assets/images/${post.isLiked ? 'like-active.svg' : 'like-not-active.svg'}">
           </button>
 
@@ -81,6 +82,8 @@ export function renderPostsPageComponent({ appEl, isUser }) {
   
   for (let button of document.querySelectorAll(".like-button")) {
       button.addEventListener("click", () => {
+        const postId = button.dataset.postId;
+        fetchlike({ token, postId });
         alert('like');  
       });
   }

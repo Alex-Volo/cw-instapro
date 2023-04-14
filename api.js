@@ -105,3 +105,20 @@ export function uploadImage({ file }) {
   })
     .then(response => response.json());
 }
+
+export function fetchlike({ token, postId }) {
+  {
+    return fetch(postsHost + `/${postId}/like`, {
+      method: "POST",
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 400) {
+        throw new Error("Бидааа!");
+      }
+      return response.json();
+    });
+  }
+}

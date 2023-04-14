@@ -6,9 +6,13 @@
       2.2. Подключить логику +
       2.3. Разобраться с uploadImage +
    3. Страница с постами конкретного юзверя
-      3.1. Сделать функцию getUserPosts
-      3.2. Сделать renderApp
-   4. Реализовать возможность лайков */
+      3.1. Сделать функцию getUserPosts +
+      3.2. Сделать renderApp +
+   4. Реализовать возможность лайков
+      4.1. Дата-тег
+      4.2. Функция на POST лайка +
+      4.3. Функция на POST дизлайка
+      4.4. Перерисовать конкретную кнопку */
 
 import { getPosts, getUserPosts } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
@@ -134,7 +138,8 @@ const renderApp = () => {
     let isUser = false;
     return renderPostsPageComponent({
       appEl,
-      isUser
+      isUser,
+      token: getToken()
     });
   }
 
@@ -143,7 +148,8 @@ const renderApp = () => {
     // TODO: реализовать страницу фотографию пользвателя
     return renderPostsPageComponent({
       appEl,
-      isUser
+      isUser,
+      token: getToken()
     });
   }
 };
