@@ -1,7 +1,9 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage } from "../index.js";
+import { posts, goToPage, user } from "../index.js";
 import { fetchlike } from "../api.js"
+import { formatDistanceToNow } from "date-fns";
+import { ru } from 'date-fns/locale/';
 
 export function renderPostsPageComponent({ appEl, isUser, token }) {
   // TODO: реализовать рендер постов из api
@@ -57,7 +59,7 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
           ${post.description}
         </p>
 
-        <p class="post-date">${post.createdAt}</p>
+        <p class="post-date">${formatDistanceToNow(new Date(post.createdAt),{locale: ru, addSuffix: true})}</p>
         
       </li>
     `
@@ -86,12 +88,22 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
         const index = button.closest('.post').dataset.index;
         let isLiked = ''
         posts[index].isLiked ? isLiked = 1 : isLiked = 0;
-
-        fetchlike({ token, postId, isLiked })
-        .then(() => {
-          isLiked ? posts[index].isLiked = false : posts[index].isLiked = true;
-          renderPostsPageComponent({ appEl, isUser, token })
-        });
+        if(user) {
+          fetchlike({ token, postId, isLiked })
+          .then(() => {          
+            if(isLiked) {
+              posts[index].isLiked = false
+              posts[index].likes.pop();
+            } else {
+              posts[index].isLiked = true;
+              posts[index].likes.push({
+                id: user._id,
+                name: user.name});
+            }
+          
+            renderPostsPageComponent({ appEl, isUser, token })
+          })
+      };
  
       });
   }
