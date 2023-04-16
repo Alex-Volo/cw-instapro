@@ -14,16 +14,31 @@ export function removeUserFromLocalStorage(user) {
   window.localStorage.removeItem("user");
 }
 
-export function validate(input) {
+export function validate(input, placeholder = '') {
   if (input.value === '' || input.value === '\n') {
       input.classList.add('error');
       input.placeholder = 'Поле не может быть пустым!';
       input.value = '';
       setTimeout(() => {
           input.classList.remove('error')
-          input.placeholder = ``;
+          input.placeholder = placeholder;
       }, 1500);
   } else {
       return true;
+  }
+}
+
+export function checkLogin(input, placeholder = ''){
+  const pattern = /^[a-zа-я][a-zа-я0-9-_]*$/i;
+  if(!pattern.test(input.value)){
+    input.classList.add('error');
+    input.placeholder = 'Поле не может содержать специальные символы, кроме "-" и "_"';
+    input.value = '';
+    setTimeout(() => {
+        input.classList.remove('error')
+        input.placeholder = placeholder;
+    }, 1500);
+  } else {
+    return true;
   }
 }
