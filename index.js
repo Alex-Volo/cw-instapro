@@ -104,6 +104,10 @@ export const goToPage = (newPage, data) => {
           userId = data.userId;
           renderApp();
         })
+        .catch((error) => {
+          console.error(error);
+          goToPage(POSTS_PAGE);
+        });
       // TODO: реализовать получение постов юзера из API
 
     }

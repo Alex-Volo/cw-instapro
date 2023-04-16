@@ -41,6 +41,9 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
           imageUrl = fileUrl;
           onImageUrlChange(imageUrl);
           render();
+        })
+        .catch((error) => {
+          console.error(error);
         });
       }
     });

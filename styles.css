@@ -196,3 +196,7 @@
   width: 100%;
   text-align: center;
 }
+
+.error {
+  background-color: #d5202084;
+}

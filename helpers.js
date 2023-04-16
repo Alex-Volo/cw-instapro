@@ -13,3 +13,17 @@ export function getUserFromLocalStorage(user) {
 export function removeUserFromLocalStorage(user) {
   window.localStorage.removeItem("user");
 }
+
+export function validate(input) {
+  if (input.value === '' || input.value === '\n') {
+      input.classList.add('error');
+      input.placeholder = 'Поле не может быть пустым!';
+      input.value = '';
+      setTimeout(() => {
+          input.classList.remove('error')
+          input.placeholder = ``;
+      }, 1500);
+  } else {
+      return true;
+  }
+}
