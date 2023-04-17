@@ -1,5 +1,3 @@
-// Замени на свой, чтобы получить независимый от других набор данных.
-// "боевая" версия инстапро лежит в ключе prod
 // "Alex-Volo" "prod"
 const personalKey = "Alex-Volo";
 const baseHost = "https://webdev-hw-api.vercel.app";

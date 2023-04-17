@@ -3,7 +3,7 @@ import { onAddPostClick } from "../api.js";
 import { goToPage } from "../index.js";
 import { POSTS_PAGE } from "../routes.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
-import { validate } from "../helpers.js";
+import { validate, safeInput } from "../helpers.js";
 
 export function renderAddPostPageComponent({ appEl, token }) {
   const render = () => {
@@ -44,7 +44,6 @@ export function renderAddPostPageComponent({ appEl, token }) {
     let currentImageUrl = '';
     document.getElementById("add-button").addEventListener("click", () => {
       const descriptionInput = document.querySelector('.input.textarea');
-      const imageInput = document.querySelector('.file-upload-input');
       
       if(!currentImageUrl) {
         alert('Добавьте изображение');
@@ -53,7 +52,7 @@ export function renderAddPostPageComponent({ appEl, token }) {
       if(!validate(descriptionInput)) return;
 
       onAddPostClick({
-        description: descriptionInput.value,
+        description: safeInput(descriptionInput.value),
         imageUrl: currentImageUrl,
         token: token,
       })

@@ -33,7 +33,7 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
       
         ${isUser ? '' : `<div class="post-header" data-user-id=${post.user.id}>
         <img src="${post.user.imageUrl}" class="post-header__user-image">
-        <p class="post-header__user-name">${[post.user.name]}</p>
+        <p class="post-header user-name">${[post.user.name]}</p>
       </div>`}
 
         <div class="post-image-container">
