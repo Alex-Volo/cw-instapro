@@ -102,11 +102,13 @@
   padding-bottom: 5px;
   cursor: pointer;
 }
-
+.like-button:hover{
+  transform: scale(1.1);
+}
 .user-name {
   font-weight: 500;
 }
-.user-name:hover {
+.post-header__user-name:hover {
   text-decoration: underline;
 }
 .post-text {
@@ -216,4 +218,44 @@
 
 .error {
   background-color: #d5202084;
+}
+.like-animation {
+  animation: like .6s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+@keyframes like {
+  0% {
+    transform: scale(1.2);
+  }
+  25% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.posts-animation {
+  animation: puffIn .4s;
+  
+}
+
+@keyframes puffIn {
+  0% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: scale(1.2, 1.2);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
+    filter: blur(0px);
+  }
 }
