@@ -86,6 +86,7 @@
   height: 100%;
   max-width: 500px;
   object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .post-likes {
@@ -268,8 +269,54 @@
     height: 600px;
     max-height: 600px;
   }
-  .center{
-    padding-left: calc(50% - 400px);
-    padding-right: calc(50% - 400px);
+  .page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .page-header{
+    padding: 40px 20px;
+  }
+  .posts{
+    font-size: 18px;
+  }
+  .post-header{
+    margin-bottom: 20px;
+  }
+  .post-header__user-image {
+    width: 60px;
+    height: 60px;
+  }
+  .post + .post {
+    margin-top: 40px;
+  }
+  .post-likes {
+    margin-top: 16px;
+  }
+  .post-text{
+    font-size: 16px;
+  }
+  .post-date{
+    margin-top: 12px;
+    font-size: 16px;
+  }
+  .logo {
+    font-size: 36px;
+  }
+  .logo:hover {
+    font-size: 37px;
+  }
+  .header-container {
+    margin-bottom: 32px;
+  }
+  .header-button {
+    font-size: 18px;
+  }
+  .header-button:hover {
+    font-size: 19px;
+  }
+  .form-inputs{
+    gap: 16px;
   }
 }

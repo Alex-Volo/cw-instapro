@@ -6,7 +6,7 @@
      1.4. Ссылка на пользователя +
      1.5. На лайк + 
    2. Добавить анимацию на лайк +
-   3. Сделать нормальную десктопную версию
+   3. Сделать нормальную десктопную версию +
    4. Поменять строку "и еще пользователю"
    5. Анимация выпадения списка постов. +
    
@@ -138,21 +138,24 @@ const renderApp = () => {
 
   if (page === POSTS_PAGE) {
     let isUser = false;
-    return renderPostsPageComponent({
+    renderPostsPageComponent({
       appEl,
       isUser,
       token: getToken()
-    });
+    })
+    document.querySelector('.page-container').classList.add('posts-animation');
+    return;
   }
 
   if (page === USER_POSTS_PAGE) {
     let isUser = true;
-    // TODO: реализовать страницу фотографию пользвателя
-    return renderPostsPageComponent({
+    renderPostsPageComponent({
       appEl,
       isUser,
       token: getToken()
-    });
+    })
+    document.querySelector('.page-container').classList.add('posts-animation');
+    return;
   }
 };
 
