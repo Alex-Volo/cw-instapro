@@ -10,7 +10,7 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
   console.log("Актуальный список постов:", posts);
   console.log(isUser)
 
-  const appHtml = `<div class="page-container posts-animation">
+  const appHtml = `<div class="page-container center posts-animation">
     <div class="header-container"></div>`
     +
     `${isUser ? `<div class="posts-user-header"><img src="${posts[0].user.imageUrl}"

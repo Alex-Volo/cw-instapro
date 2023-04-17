@@ -259,3 +259,17 @@
     filter: blur(0px);
   }
 }
+
+@media (min-width: 600px){
+  .post-image {
+    max-width: 800px;
+  }
+  .post-image-container {
+    height: 600px;
+    max-height: 600px;
+  }
+  .center{
+    padding-left: calc(50% - 400px);
+    padding-right: calc(50% - 400px);
+  }
+}
