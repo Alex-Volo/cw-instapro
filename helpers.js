@@ -49,3 +49,7 @@ export function safeInput(string) {
   .replaceAll(">", "&gt;")
   .replaceAll('"', "&quot;");
 }
+
+export function correctUsersString(num) {
+  return (num % 10 === 1) ? num +' пользователю' : num + ' пользователям';
+}

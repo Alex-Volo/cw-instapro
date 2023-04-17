@@ -1,7 +1,8 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, user } from "../index.js";
-import { fetchlike } from "../api.js"
+import { fetchlike } from "../api.js";
+import { correctUsersString } from "../helpers.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from 'date-fns/locale/';
 
@@ -44,7 +45,7 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
 
           <p class="post-likes-text">
               Нравится: <strong>
-              ${post.likes.length > 1 ? post.likes[0].name + ` и ещё ${post.likes.length - 1} пользователям`
+              ${post.likes.length > 1 ? post.likes[0].name + ` и ещё ${correctUsersString(post.likes.length - 1)}`
           : post.likes.length ? post.likes[0].name
             : "0"}</strong>
           </p>
@@ -83,10 +84,11 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
       const postId = button.dataset.postId;
       const index = button.closest('.post').dataset.index;
       const currentButton = button;
-      currentButton.classList.add('like-animation');
+      
       let isLiked = ''
       posts[index].isLiked ? isLiked = 1 : isLiked = 0;
       if (user) {
+        currentButton.classList.add('like-animation');
         fetchlike({ token, postId, isLiked })
           .then(() => {
             if (isLiked) {
