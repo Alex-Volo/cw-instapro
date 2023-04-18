@@ -44,7 +44,7 @@ export function checkLogin(input, placeholder = ''){
 }
 
 export function safeInput(string) {
-   return str.replaceAll("&", "&amp;")
+   return string.replaceAll("&", "&amp;")
   .replaceAll("<", "&lt;")
   .replaceAll(">", "&gt;")
   .replaceAll('"', "&quot;");

@@ -11,7 +11,6 @@ function responseHandler(response) {
       case 201:
         return response.json();
 
-
       case 400:
         return response.json().then(json => {
           throw new Error(`Bad request: ${json.error}`)
