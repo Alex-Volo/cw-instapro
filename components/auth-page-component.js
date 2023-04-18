@@ -1,6 +1,7 @@
 import { loginUser, registerUser } from "../api.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
+import { safeInput } from "../helpers.js";
 import { validate, checkLogin } from "../helpers.js";
 
 export function renderAuthPageComponent({ appEl, setUser }) {
@@ -110,7 +111,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         const passwordInput = document.getElementById("password-input");
 
         if (!validate(nameInput, 'Имя')) return;
-        if(!checkLogin(nameInput, 'Имя')) return;
+        // if(!checkLogin(nameInput, 'Имя')) return;
         if (!validate(loginInput, 'Логин')) return;
         if(!checkLogin(loginInput, 'Логин')) return;
         if (!validate(passwordInput, 'Пароль')) return;
@@ -123,7 +124,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         registerUser({
           login: login,
           password: password,
-          name: name,
+          name: safeInput(name),
           imageUrl,
         })
           .then((user) => {
