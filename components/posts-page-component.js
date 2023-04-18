@@ -7,9 +7,6 @@ import { formatDistanceToNow } from "date-fns";
 import { ru } from 'date-fns/locale/';
 
 export function renderPostsPageComponent({ appEl, isUser, token }) {
-  // TODO: реализовать рендер постов из api
-  console.log("Актуальный список постов:", posts);
-  console.log(isUser)
 
   const appHtml = `<div class="page-container center">
     <div class="header-container"></div>`
