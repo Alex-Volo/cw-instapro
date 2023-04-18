@@ -1,6 +1,8 @@
 import { loginUser, registerUser } from "../api.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
+import { safeInput } from "../helpers.js";
+import { validate, checkLogin } from "../helpers.js";
 
 export function renderAuthPageComponent({ appEl, setUser }) {
   let isLoginMode = true;
@@ -79,18 +81,15 @@ export function renderAuthPageComponent({ appEl, setUser }) {
       setError("");
 
       if (isLoginMode) {
+        const loginInput = document.getElementById("login-input");
         const login = document.getElementById("login-input").value;
+        const passwordInput = document.getElementById("password-input");
         const password = document.getElementById("password-input").value;
 
-        if (!login) {
-          alert("Введите логин");
-          return;
-        }
+        if(!validate(loginInput, 'Логин')) return;
 
-        if (!password) {
-          alert("Введите пароль");
-          return;
-        }
+        if(!validate(passwordInput, 'Пароль')) return;
+
 
         loginUser({
           login: login,
@@ -105,21 +104,17 @@ export function renderAuthPageComponent({ appEl, setUser }) {
           });
       } else {
         const login = document.getElementById("login-input").value;
+        const loginInput = document.getElementById("login-input");
         const name = document.getElementById("name-input").value;
+        const nameInput = document.getElementById("name-input");
         const password = document.getElementById("password-input").value;
-        if (!name) {
-          alert("Введите имя");
-          return;
-        }
-        if (!login) {
-          alert("Введите логин");
-          return;
-        }
+        const passwordInput = document.getElementById("password-input");
 
-        if (!password) {
-          alert("Введите пароль");
-          return;
-        }
+        if (!validate(nameInput, 'Имя')) return;
+        // if(!checkLogin(nameInput, 'Имя')) return;
+        if (!validate(loginInput, 'Логин')) return;
+        if(!checkLogin(loginInput, 'Логин')) return;
+        if (!validate(passwordInput, 'Пароль')) return;
 
         if (!imageUrl) {
           alert("Не выбрана фотография");
@@ -129,7 +124,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         registerUser({
           login: login,
           password: password,
-          name: name,
+          name: safeInput(name),
           imageUrl,
         })
           .then((user) => {
